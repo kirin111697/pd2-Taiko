@@ -11,6 +11,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <QKeyEvent>
+//#include "result.h"
 
 namespace Ui {
 class gamePage;
@@ -28,6 +29,7 @@ public:
 
 public slots:
     void addBit();
+    void outofTime();
     void keyPressEvent(QKeyEvent *hit);
 
 private:
@@ -38,7 +40,9 @@ private:
     item *bit;
     QVector<item*> keep;
     QVector<item*> ::iterator it;
+    //result *resultP;
     int score;
+    int pastTime;
 };
 
 #endif // GAMEPAGE_H

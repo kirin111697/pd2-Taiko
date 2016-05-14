@@ -8,6 +8,7 @@ gamePage::gamePage(QWidget *parent) :
     ui(new Ui::gamePage),
     gif(new QMovie),
     moveTMR(new QTimer)
+    //resultP(new result)
 {
     ui->setupUi(this);
     gif->setFileName(":/background/imas.gif");
@@ -15,8 +16,11 @@ gamePage::gamePage(QWidget *parent) :
     gif->start();
     sc=new QGraphicsScene(0,0,1280,310);
     ui->graphicsView->setScene(sc);
+    connect(mapTMR,SIGNAL(timeout()),this,SLOT(outofTime()));
     srand(time(NULL));
+    keep.clear();
     score=0;
+    pastTime=0;
 }
 
 gamePage::~gamePage()
@@ -65,7 +69,17 @@ void gamePage::keyPressEvent(QKeyEvent *hit)
         }
     }
     else{
+        delete *it;
         ++it;
+    }
+}
+
+void gamePage::outofTime(){
+    pastTime++;
+    if(pastTime==30){
+        this->close();
+        pastTime=0;
+        //resultP->show();
     }
 }
 
