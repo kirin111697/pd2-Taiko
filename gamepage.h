@@ -1,6 +1,7 @@
 #ifndef GAMEPAGE_H
 #define GAMEPAGE_H
 
+#include <QDebug>
 #include <QWidget>
 #include <QMovie>
 #include <QGraphicsScene>
@@ -37,6 +38,7 @@ private:
     item *bit;
     QVector<item*> keep;
     QVector<item*> ::iterator it;
+    int score;
 };
 
 #endif // GAMEPAGE_H

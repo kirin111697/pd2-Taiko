@@ -8,7 +8,7 @@ gamePage::gamePage(QWidget *parent) :
     ui(new Ui::gamePage),
     gif(new QMovie),
     moveTMR(new QTimer)
-    {
+{
     ui->setupUi(this);
     gif->setFileName(":/background/imas.gif");
     ui->label->setMovie(gif);
@@ -16,6 +16,7 @@ gamePage::gamePage(QWidget *parent) :
     sc=new QGraphicsScene(0,0,1280,310);
     ui->graphicsView->setScene(sc);
     srand(time(NULL));
+    score=0;
 }
 
 gamePage::~gamePage()
@@ -47,17 +48,24 @@ void gamePage::keyPressEvent(QKeyEvent *hit)
         return;
     if ((*it)->x() > 70){
         if (hit->key() == Qt::Key_D){
+            qDebug() << hit->key();
             if ((*it)->getColor() == 0){
+                score++;
                 delete *it;
                 ++it;
             }
         }
         else if(hit->key() == Qt::Key_K){
+            qDebug() << hit->key();
             if ((*it)->getColor() == 1){
+                score++;
                 delete *it;
                 ++it;
             }
         }
+    }
+    else{
+        ++it;
     }
 }
 
