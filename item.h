@@ -8,11 +8,15 @@ class item : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    item();
+    item(int color);
+    int getColor();
 
 public slots:
     void moving();
-    void setting();
+    void setting(int color);
+
+private:
+    int bitColor;
 };
 
 #endif // ITEM_H

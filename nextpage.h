@@ -24,7 +24,7 @@ public slots:
 private:
     Ui::nextPage *ui;
     gamePage *gameP;
-    QTimer *timer;
+    QTimer *mapTMR;
 };
 
 #endif // NEXTPAGE_H

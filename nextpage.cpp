@@ -20,7 +20,8 @@ void nextPage::keyPressEvent(QKeyEvent *press)
     qDebug() << press->key();
     this->hide();
     gameP->show();
-    gameP->timer->start(30);
+    gameP->bitmap();
+    gameP->mapTMR->start(1000);
 
     /*if (press->key() == Qt::Key_F){
         qDebug() << press->key();
