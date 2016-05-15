@@ -79,7 +79,7 @@ void gamePage::keyPressEvent(QKeyEvent *hit)
     if ((*det)->x() < 300){
         if (hit->key() == Qt::Key_D){
             if ((*det)->getColor() == 0){
-                score++;
+                score+=4;
                 ui->lcdScore->display(score);
                 delete *det;
                 ++det;
@@ -91,7 +91,7 @@ void gamePage::keyPressEvent(QKeyEvent *hit)
         }
         else if(hit->key() == Qt::Key_K){
             if ((*det)->getColor() == 1){
-                score++;
+                score+=4;
                 ui->lcdScore->display(score);
                 delete *det;
                 ++det;

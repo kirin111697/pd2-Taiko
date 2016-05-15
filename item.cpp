@@ -36,6 +36,6 @@ int item::getColor(){
     return bitColor;
 }
 
-int item::getTime(){
+/*int item::getTime(){
     return appearT;
-}
+}*/

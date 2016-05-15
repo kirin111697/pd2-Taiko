@@ -23,7 +23,6 @@ class gamePage : public QWidget
 
 public:
     explicit gamePage(QWidget *parent = 0);
-    QTimer *mapTMR;
     void bitmap();
     void startGame();
     ~gamePage();
@@ -40,6 +39,7 @@ private:
     QMovie *gif;
     QGraphicsScene *sc;
     QTimer *moveTMR;
+    QTimer *mapTMR;
     item *bit;
     QVector<item*> keep;
     QVector<item*> ::iterator add;
