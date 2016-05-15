@@ -17,6 +17,8 @@ gamePage::gamePage(QWidget *parent) :
     sc=new QGraphicsScene(0,0,1280,310);
     ui->graphicsView->setScene(sc);
     connect(mapTMR,SIGNAL(timeout()),this,SLOT(outofTime()));
+    connect(mapTMR,SIGNAL(timeout()),this,SLOT(addBit()));
+    connect(mapTMR,SIGNAL(timeout()),this,SLOT(countdown()));
     srand(time(NULL));
     score=0;
     pastTime=0;
@@ -34,14 +36,12 @@ gamePage::~gamePage()
 
 void gamePage::startGame(){
     bitmap();
-    connect(mapTMR,SIGNAL(timeout()),this,SLOT(addBit()));
-    connect(mapTMR,SIGNAL(timeout()),this,SLOT(countdown()));
     mapTMR->start(1000);
+    ui->lcdScore->display(0);
+    ui->lcdTime->display(0);
 }
 
 void gamePage::bitmap(){//製作樂譜
-    //connect(mapTMR,SIGNAL(timeout()),this,SLOT(addBit()));
-    //it=keep.begin();
     int color;
     keep.clear();
     for(int i=0;i<24;i++){
@@ -76,6 +76,7 @@ void gamePage::keyPressEvent(QKeyEvent *hit)
         if (hit->key() == Qt::Key_D){
             if ((*det)->getColor() == 0){
                 score++;
+                ui->lcdScore->display(score);
                 qDebug() << "add score";
                 delete *det;
                 ++det;
@@ -91,6 +92,7 @@ void gamePage::keyPressEvent(QKeyEvent *hit)
         else if(hit->key() == Qt::Key_K){
             if ((*det)->getColor() == 1){
                 score++;
+                ui->lcdScore->display(score);
                 delete *det;
                 ++det;
                 qDebug() << det;
@@ -116,18 +118,18 @@ void gamePage::outofTime(){
     if(pastTime==30){
         mapTMR->stop();
         moveTMR->stop();
-        this->hide();
+        //this->hide();
         pastTime=0;
         sc->clear();
         resultP->show();
         resultP->result(score);
-        qDebug()<<resultP->exec();
         if(resultP->exec()){
             score=0;
-            this->show();
+            //this->show();
             startGame();
         }
         else{
+            this->close();
             return;
         }
     }
