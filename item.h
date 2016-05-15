@@ -10,6 +10,7 @@ class item : public QObject, public QGraphicsPixmapItem
 public:
     item(int color);
     int getColor();
+    int getTime();
 
 public slots:
     void moving();
@@ -17,6 +18,7 @@ public slots:
 
 private:
     int bitColor;
+    int appearT;
 };
 
 #endif // ITEM_H

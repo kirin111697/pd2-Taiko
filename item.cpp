@@ -11,12 +11,14 @@ void item::setting(int color){
             setPixmap(QPixmap(":/background/mh2_kukku.gif"));
             setPos(1280,70);
             bitColor=0;
+            //appearT=aprTime;
         break;
 
         case 1:
             setPixmap(QPixmap(":/background/mh2_kukku-a.gif"));
             setPos(1280,70);
             bitColor=1;
+            //appearT=aprTime;
         break;
     }
 }
@@ -31,4 +33,8 @@ void item::moving(){
 
 int item::getColor(){
     return bitColor;
+}
+
+int item::getTime(){
+    return appearT;
 }

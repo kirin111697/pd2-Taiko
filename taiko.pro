@@ -16,16 +16,19 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     nextpage.cpp \
     gamepage.cpp \
-    item.cpp
+    item.cpp \
+    showresult.cpp
 
 HEADERS  += mainwindow.h \
     nextpage.h \
     gamepage.h \
-    item.h
+    item.h \
+    showresult.h
 
 FORMS    += mainwindow.ui \
     nextpage.ui \
-    gamepage.ui
+    gamepage.ui \
+    showresult.ui
 
 RESOURCES += \
     source.qrc

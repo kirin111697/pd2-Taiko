@@ -7,8 +7,8 @@ gamePage::gamePage(QWidget *parent) :
     mapTMR(new QTimer),
     ui(new Ui::gamePage),
     gif(new QMovie),
-    moveTMR(new QTimer)
-    //resultP(new result)
+    moveTMR(new QTimer),
+    resultP(new showResult)
 {
     ui->setupUi(this);
     gif->setFileName(":/background/imas.gif");
@@ -18,7 +18,6 @@ gamePage::gamePage(QWidget *parent) :
     ui->graphicsView->setScene(sc);
     connect(mapTMR,SIGNAL(timeout()),this,SLOT(outofTime()));
     srand(time(NULL));
-    keep.clear();
     score=0;
     pastTime=0;
 }
@@ -30,96 +29,107 @@ gamePage::~gamePage()
     delete moveTMR;
     delete gif;
     delete sc;
+    delete resultP;
 }
 
-void gamePage::bitmap(){
+void gamePage::startGame(){
+    bitmap();
     connect(mapTMR,SIGNAL(timeout()),this,SLOT(addBit()));
+    connect(mapTMR,SIGNAL(timeout()),this,SLOT(countdown()));
+    mapTMR->start(1000);
+}
+
+void gamePage::bitmap(){//製作樂譜
+    //connect(mapTMR,SIGNAL(timeout()),this,SLOT(addBit()));
     //it=keep.begin();
+    int color;
+    keep.clear();
+    for(int i=0;i<24;i++){
+        color=rand()%2;
+        bit=new item(color);
+        keep.push_back(bit);
+    }
+    add=keep.begin();
+    det=keep.begin();
+}
+
+void gamePage::countdown(){
+    ui->lcdTime->display(pastTime);
 }
 
 void gamePage::addBit(){
-    int color=rand()%2;
-    if (keep.empty()){
-        qDebug() << "add first bit";
-        bit=new item(color);
-        sc->addItem(bit);
-        connect(moveTMR,SIGNAL(timeout()),bit,SLOT(moving()));
+        if(add == keep.end())
+            return;
+        sc->addItem(*add);
+        connect(moveTMR,SIGNAL(timeout()),(*add),SLOT(moving()));
         moveTMR->start(20);
-        keep.push_back(bit);
-        it=keep.begin();
-        qDebug() << it;
-    }
-    else{
-        bit=new item(color);
-        sc->addItem(bit);
-        connect(moveTMR,SIGNAL(timeout()),bit,SLOT(moving()));
-        moveTMR->start(20);
-        keep.push_back(bit);
         qDebug() << "add bit";
-
-    }
+        ++add;
 }
 
 void gamePage::keyPressEvent(QKeyEvent *hit)
 {
-    qDebug() << "key pressed";
-    //qDebug() << (*it)->x();
-    if (it==keep.end())
+    if (det==keep.end())
         return;
-    if ((*it)->x() > 70 && (*it)->x() < 200){
+    if ((*det)->x() >= 70){
+        qDebug() << (*det)->x();
         if (hit->key() == Qt::Key_D){
-            /*qDebug() << "still working";
-            qDebug() << hit->key();
-            qDebug() << "still working";*/
-            if ((*it)->getColor() == 0){
+            if ((*det)->getColor() == 0){
                 score++;
                 qDebug() << "add score";
-                delete *it;
-                ++it;
-                qDebug() << it;
+                delete *det;
+                ++det;
+                qDebug() << det;
             }
             else{
                 qDebug() << "wrong key";
-                delete *it;
-                ++it;
-                qDebug() << it;
+                delete *det;
+                ++det;
+                qDebug() << det;
             }
         }
         else if(hit->key() == Qt::Key_K){
-            //qDebug() << "still working";
-            qDebug() << hit->key();
-            //qDebug() << "still working";
-            if ((*it)->getColor() == 1){
-                //qDebug() << "still working";
+            if ((*det)->getColor() == 1){
                 score++;
-                delete *it;
-                ++it;
-                qDebug() << it;
+                delete *det;
+                ++det;
+                qDebug() << det;
             }
             else{
-                delete *it;
-                ++it;
-                qDebug() << it;
+                delete *det;
+                ++det;
+                qDebug() << det;
             }
         }
     }
-    else if ((*it)->x() < 70){
+    else if ((*det)->x() < 70){
         qDebug() << "out of limit";
-        delete *it;
-        ++it;
-        qDebug() << it;
-    }
-    else{
-        qDebug() << "too early";
+        delete *det;
+        ++det;
+        qDebug() << det;
     }
 }
 
 void gamePage::outofTime(){
     pastTime++;
+    qDebug() << pastTime;
     if(pastTime==30){
-        this->close();
+        mapTMR->stop();
+        moveTMR->stop();
+        this->hide();
         pastTime=0;
-        //resultP->show();
+        sc->clear();
+        resultP->show();
+        resultP->result(score);
+        qDebug()<<resultP->exec();
+        if(resultP->exec()){
+            score=0;
+            this->show();
+            startGame();
+        }
+        else{
+            return;
+        }
     }
 }
 
