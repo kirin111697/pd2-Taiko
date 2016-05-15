@@ -23,10 +23,11 @@ void item::setting(int color){
     }
 }
 void item::moving(){
-    if (x()>0){
+    if (x()>50){
         setPos(x()-8,y());
     }
     else{
+        emit kill();
         delete this;
     }
 }

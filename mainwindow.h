@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "nextpage.h"
+#include "ready.h"
 
 namespace Ui {
 class MainWindow;
@@ -21,7 +21,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    nextPage *nextP;
+    ready *readyP;
 };
 
 #endif // MAINWINDOW_H

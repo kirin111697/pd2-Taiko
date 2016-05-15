@@ -44,7 +44,7 @@ void gamePage::startGame(){
 void gamePage::bitmap(){//製作樂譜
     int color;
     keep.clear();
-    for(int i=0;i<24;i++){
+    for(int i=0;i<25;i++){
         color=rand()%2;
         bit=new item(color);
         keep.push_back(bit);
@@ -62,31 +62,31 @@ void gamePage::addBit(){
             return;
         sc->addItem(*add);
         connect(moveTMR,SIGNAL(timeout()),(*add),SLOT(moving()));
-        moveTMR->start(20);
-        qDebug() << "add bit";
+        connect(*add,SIGNAL(kill()),this,SLOT(killBit()));
+        moveTMR->start(15);
         ++add;
+}
+
+void gamePage::killBit(){
+    if (det != keep.end())
+        ++det;
 }
 
 void gamePage::keyPressEvent(QKeyEvent *hit)
 {
     if (det==keep.end())
         return;
-    if ((*det)->x() >= 70){
-        qDebug() << (*det)->x();
+    if ((*det)->x() < 300){
         if (hit->key() == Qt::Key_D){
             if ((*det)->getColor() == 0){
                 score++;
                 ui->lcdScore->display(score);
-                qDebug() << "add score";
                 delete *det;
                 ++det;
-                qDebug() << det;
             }
             else{
-                qDebug() << "wrong key";
                 delete *det;
                 ++det;
-                qDebug() << det;
             }
         }
         else if(hit->key() == Qt::Key_K){
@@ -95,37 +95,26 @@ void gamePage::keyPressEvent(QKeyEvent *hit)
                 ui->lcdScore->display(score);
                 delete *det;
                 ++det;
-                qDebug() << det;
             }
             else{
                 delete *det;
                 ++det;
-                qDebug() << det;
             }
         }
-    }
-    else if ((*det)->x() < 70){
-        qDebug() << "out of limit";
-        delete *det;
-        ++det;
-        qDebug() << det;
     }
 }
 
 void gamePage::outofTime(){
     pastTime++;
-    qDebug() << pastTime;
     if(pastTime==30){
         mapTMR->stop();
         moveTMR->stop();
-        //this->hide();
         pastTime=0;
         sc->clear();
         resultP->show();
         resultP->result(score);
         if(resultP->exec()){
             score=0;
-            //this->show();
             startGame();
         }
         else{

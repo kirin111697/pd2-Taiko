@@ -32,6 +32,7 @@ public slots:
     void addBit();
     void outofTime();
     void countdown();
+    void killBit();
     void keyPressEvent(QKeyEvent *hit);
 
 private:

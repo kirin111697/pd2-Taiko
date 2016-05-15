@@ -14,21 +14,21 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    nextpage.cpp \
     gamepage.cpp \
     item.cpp \
-    showresult.cpp
+    showresult.cpp \
+    ready.cpp
 
 HEADERS  += mainwindow.h \
-    nextpage.h \
     gamepage.h \
     item.h \
-    showresult.h
+    showresult.h \
+    ready.h
 
 FORMS    += mainwindow.ui \
-    nextpage.ui \
     gamepage.ui \
-    showresult.ui
+    showresult.ui \
+    ready.ui
 
 RESOURCES += \
     source.qrc

@@ -4,7 +4,7 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    nextP(new nextPage)
+    readyP(new ready)
 {
     ui->setupUi(this);
 }
@@ -17,5 +17,5 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
     this->hide();
-    nextP->show();
+    readyP->show();
 }

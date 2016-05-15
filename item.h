@@ -16,6 +16,9 @@ public slots:
     void moving();
     void setting(int color);
 
+signals:
+    void kill();
+
 private:
     int bitColor;
     int appearT;
