@@ -32,7 +32,7 @@
    <string>home</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-image: url(:/background/6.JPG);
+   <string notr="true">background-image: url(:/background/resources/6.JPG);
 </string>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -75,7 +75,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image: url(:/background/logo_cinderella_taiko.png);</string>
+     <string notr="true">background-image: url(:/background/resources/logo_cinderella_taiko.png);</string>
     </property>
     <property name="text">
      <string/>

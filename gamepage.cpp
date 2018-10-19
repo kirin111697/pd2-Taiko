@@ -4,14 +4,14 @@
 
 gamePage::gamePage(QWidget *parent) :
     QWidget(parent),
-    mapTMR(new QTimer),
     ui(new Ui::gamePage),
     gif(new QMovie),
     moveTMR(new QTimer),
+    mapTMR(new QTimer),
     resultP(new showResult)
 {
     ui->setupUi(this);
-    gif->setFileName(":/background/imas.gif");
+    gif->setFileName(":/background/resources/imas.gif");
     ui->label->setMovie(gif);
     gif->start();
     sc=new QGraphicsScene(0,0,1280,310);
@@ -22,6 +22,7 @@ gamePage::gamePage(QWidget *parent) :
     srand(time(NULL));
     score=0;
     pastTime=0;
+    speed=15;
 }
 
 gamePage::~gamePage()
@@ -63,7 +64,7 @@ void gamePage::addBit(){
         sc->addItem(*add);
         connect(moveTMR,SIGNAL(timeout()),(*add),SLOT(moving()));
         connect(*add,SIGNAL(kill()),this,SLOT(killBit()));
-        moveTMR->start(15);
+        moveTMR->start(speed);
         ++add;
 }
 
@@ -123,4 +124,3 @@ void gamePage::outofTime(){
         }
     }
 }
-

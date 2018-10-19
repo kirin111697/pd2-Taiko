@@ -35,7 +35,7 @@
     </size>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-image: url(:/background/senki_zesshou_symphogear_311.jpg);</string>
+    <string notr="true">background-image: url(:/background/resources/senki_zesshou_symphogear_311.jpg);</string>
    </property>
    <property name="text">
     <string/>

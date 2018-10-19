@@ -91,7 +91,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-image: url(:/background/red_circle_light.png);</string>
+    <string notr="true">background-image: url(:/background/resources/red_circle_light.png);</string>
    </property>
    <property name="text">
     <string/>
@@ -107,8 +107,8 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-image: url(:/background/sfieldbg.png);
-background-image: url(:/background/roll.png);</string>
+    <string notr="true">background-image: url(:/background/resources/sfieldbg.png);
+background-image: url(:/background/resources/roll.png);</string>
    </property>
    <property name="text">
     <string/>

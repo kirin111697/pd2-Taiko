@@ -47,6 +47,7 @@ private:
     showResult *resultP;
     int score;
     int pastTime;
+    int speed;
 };
 
 #endif // GAMEPAGE_H
